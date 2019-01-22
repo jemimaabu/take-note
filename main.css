@@ -1,6 +1,7 @@
 body {
     background-color: #fafafa;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 main {
@@ -26,18 +27,15 @@ main {
 div#form-container {
     position: relative;
     margin-bottom: 3.5em;
+    background-color: white;
+    border: 1px solid #dadada;
 }
 
 div#form-container div#form-error {
     color: #b33030;
 }
 
-div#form-container form {
-    background-color: white;
-    border: 1px solid #dadada;
-}
-
-div#form-container form input#title {
+div#form-container input#title {
     width: 100%;
     background: transparent;
     border: none;
@@ -47,7 +45,7 @@ div#form-container form input#title {
     font-weight: 700;
 }
 
-div#form-container form textarea#content {
+div#form-container textarea#content {
     display: block;
     width: -webkit-fill-available;
     min-height: 5em;
@@ -58,7 +56,7 @@ div#form-container form textarea#content {
     padding: 0em 1em 1em;
 }
 
-div#form-container form button#add-note {
+div#form-container button#add-note {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -100,7 +98,6 @@ div#notes-wrapper:empty {
     font-size: 1.5em;
     font-weight: 700;
     padding-bottom: 0.5em;
-    font-family: Arial, Helvetica, sans-serif;
     color: #5f5f5f;
 }
 
@@ -112,7 +109,7 @@ div#notes-wrapper:empty {
     color: #5a5a5a;
     padding-bottom: 1em;
     overflow-wrap: break-word;
-    font-family: Arial, Helvetica, sans-serif;
+    white-space: pre-wrap;
 }
 
 .note-date {

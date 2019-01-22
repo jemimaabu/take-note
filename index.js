@@ -34,13 +34,14 @@ function createNote(title, text, date) {
 }
 
 function addNote() {
-    if (content.value === "") {
+    if (content.value.trim() === "") {
         error.innerHTML = "Form cannot be empty"
     } else {
+        var options = { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric' };
         var noteContainer = {
             title: title.value,
             text: content.value,
-            date: new Date().toLocaleString()
+            date: new Date().toLocaleString('en-US', options)
         }
         notesArray.push(noteContainer);
         localStorage.setItem("notes", JSON.stringify(notesArray));

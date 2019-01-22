@@ -12,11 +12,9 @@
         <main>
             <div id="form-container">
                 <div id="form-error"></div>
-                <form>
-                    <input type="text" name="title" id="title" maxlength="45" placeholder="Title">
-                    <textarea name="content" id="content" placeholder="Start writing"></textarea>
-                    <button type="button" onclick="addNote()" id="add-note">Add note</button>
-                </form>
+                <input type="text" name="title" id="title" maxlength="45" placeholder="Title">
+                <textarea name="content" id="content" placeholder="Start writing"></textarea>
+                <button type="button" onclick="addNote()" id="add-note">Add note</button>
             </div>
             <div id="notes-wrapper"></div>
             <button type="button" onclick="deleteAll()" id="delete-all">Delete all</button>
