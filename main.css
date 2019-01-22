@@ -24,15 +24,15 @@ main {
     background: #555; 
 }
 
+div#form-error {
+    color: #b33030;
+}
+
 div#form-container {
     position: relative;
     margin-bottom: 3.5em;
     background-color: white;
     border: 1px solid #dadada;
-}
-
-div#form-container div#form-error {
-    color: #b33030;
 }
 
 div#form-container input#title {
