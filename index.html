@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Take Note</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A webapp for taking notes">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
+    <body>
+        <main>
+            <div id="form-container">
+                <div id="form-error"></div>
+                <form>
+                    <input type="text" name="title" id="title" maxlength="45" placeholder="Title">
+                    <textarea name="content" id="content" placeholder="Start writing"></textarea>
+                    <button type="button" onclick="addNote()" id="add-note">Add note</button>
+                </form>
+            </div>
+            <div id="notes-wrapper"></div>
+            <button type="button" onclick="deleteAll()" id="delete-all">Delete all</button>
+        </main>
+    </body>
+    <script src="index.js"></script>
+</html>
