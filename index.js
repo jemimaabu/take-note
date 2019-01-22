@@ -17,6 +17,11 @@ function createNote(title, text, date) {
     noteTitle.className="note-title";
     noteTitle.innerHTML = title;
 
+    var noteDelete = document.createElement("span");
+    noteDelete.className="note-controls";
+    noteDelete.innerHTML = "Delete";
+    noteDelete.setAttribute("onclick",`deleteNote(${document.getElementsByClassName("note").length})`);
+
     var noteText = document.createElement("div");
     noteText.className = "note-text";
     noteText.innerHTML = text;
@@ -27,7 +32,7 @@ function createNote(title, text, date) {
 
     var note = document.createElement("div");
     note.className = "note";
-    note.append(noteTitle, noteText, noteDate)
+    note.append(noteTitle, noteDelete, noteText, noteDate)
     note.id = "note"+document.getElementsByClassName("note").length;
 
     notesWrapper.insertBefore(note, notesWrapper.firstChild)
@@ -52,8 +57,9 @@ function addNote() {
     }
 }
 
-function deleteAll() {
-    localStorage.clear();
-    notesWrapper.innerHTML = "";
-    notes = [{}];
+function deleteNote(index) {
+    var note = document.getElementById(`note${index}`);
+    note.parentNode.removeChild(note);
+    notesArray.splice(index,1);
+    localStorage.setItem("notes", JSON.stringify(notesArray));
 }

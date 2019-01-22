@@ -99,6 +99,7 @@ div#notes-wrapper:empty {
     font-weight: 700;
     padding-bottom: 0.5em;
     color: #5f5f5f;
+    display: inline-block;
 }
 
 .note-title:empty {
@@ -123,6 +124,12 @@ div#notes-wrapper:empty {
     bottom: 0;
 }
 
+.note-controls {
+    float: right;
+    font-size: .8em;
+    color: #e60000;
+    cursor: pointer;
+}
 
 button#delete-all {
     margin: 1.5em 0;
