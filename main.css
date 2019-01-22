@@ -131,9 +131,5 @@ div#notes-wrapper:empty {
     cursor: pointer;
 }
 
-button#delete-all {
-    margin: 1.5em 0;
-}
-
 @media (max-width: 750px) {
 }
