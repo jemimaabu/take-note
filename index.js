@@ -35,7 +35,7 @@ function createNote(title, text, date) {
 
 function addNote() {
     if (content.value.trim() === "") {
-        error.innerHTML = "Form cannot be empty"
+        error.innerHTML = "Note cannot be empty"
     } else {
         var options = { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric' };
         var noteContainer = {
