@@ -17,14 +17,36 @@ function createNote(title, text, date) {
     noteTitle.className="note-title";
     noteTitle.innerHTML = title;
 
+    var noteEdit = document.createElement("span");
+    noteEdit.className="note-edit";
+    noteEdit.innerHTML = "Edit";
+    noteEdit.setAttribute("onclick",`editNote(${document.getElementsByClassName("note").length})`);
+
+    var noteSave = document.createElement("span");
+    noteSave.className="note-save";
+    noteSave.innerHTML = "Save";
+    noteSave.setAttribute("disabled", "true");
+    noteSave.setAttribute("onclick",`saveNote(${document.getElementsByClassName("note").length})`);
+
+    var noteExpand = document.createElement("span");
+    noteExpand.className = "note-expand";
+    noteExpand.innerHTML = "Expand";
+    noteExpand.setAttribute("onclick",`expandNote(${document.getElementsByClassName("note").length})`);
+
     var noteDelete = document.createElement("span");
-    noteDelete.className="note-controls";
+    noteDelete.className="note-delete";
     noteDelete.innerHTML = "Delete";
     noteDelete.setAttribute("onclick",`deleteNote(${document.getElementsByClassName("note").length})`);
+
+    var noteControls = document.createElement("div");
+    noteControls.className = "note-controls";
+    noteControls.append(noteExpand, noteEdit, noteSave, noteDelete)
 
     var noteText = document.createElement("div");
     noteText.className = "note-text";
     noteText.innerHTML = text;
+    noteText.setAttribute("onblur", `saveNote(${document.getElementsByClassName("note").length}), shrinkNote(${document.getElementsByClassName("note").length})`);
+    noteText.setAttribute("onfocus", `${this}.value = ${this}.value}`)
 
     var noteDate = document.createElement("div");
     noteDate.className="note-date";
@@ -32,7 +54,7 @@ function createNote(title, text, date) {
 
     var note = document.createElement("div");
     note.className = "note";
-    note.append(noteTitle, noteDelete, noteText, noteDate)
+    note.append(noteTitle, noteControls, noteText, noteDate)
     note.id = "note"+document.getElementsByClassName("note").length;
 
     notesWrapper.insertBefore(note, notesWrapper.firstChild)
@@ -46,8 +68,8 @@ function addNote() {
         var noteContainer = {
             title: title.value,
             text: content.value,
-            date: new Date().toLocaleString('en-US', options)
-        }
+            date: new Date().toLocaleString('en-US', options),
+        };
         notesArray.push(noteContainer);
         localStorage.setItem("notes", JSON.stringify(notesArray));
         createNote(noteContainer.title, noteContainer.text, noteContainer.date);
@@ -62,4 +84,48 @@ function deleteNote(index) {
     note.parentNode.removeChild(note);
     notesArray.splice(index,1);
     localStorage.setItem("notes", JSON.stringify(notesArray));
+    location.reload();
+}
+
+function editNote(index) {
+    var note = document.getElementById(`note${index}`);
+    var noteText = note.getElementsByClassName("note-text")[0];
+    var noteSave = note.getElementsByClassName("note-save")[0];
+    noteText.contentEditable = "true";
+    noteText.focus();
+    noteSave.setAttribute("disabled", "false");
+    expandNote(index)
+}
+
+function saveNote(index) {
+    var note = document.getElementById(`note${index}`);
+    var noteText = note.getElementsByClassName("note-text")[0];
+    var noteSave = note.getElementsByClassName("note-save")[0];
+    if (noteText.innerHTML.trim() === "") {
+        error.innerHTML = "Cannot save empty note"
+    } else {
+        notesArray[index].text = noteText.innerHTML;
+        noteText.contentEditable = "false";
+        localStorage.setItem("notes", JSON.stringify(notesArray));
+        error.innerHTML = "";
+        noteSave.setAttribute("disabled", "true");
+    }
+}
+
+function expandNote(index) {
+    var note = document.getElementById(`note${index}`);
+    var noteText = note.getElementsByClassName("note-text")[0];
+    var noteExpand = note.getElementsByClassName("note-expand")[0];
+    noteText.style.maxHeight = "fit-content";
+    noteExpand.innerHTML="Minimize";
+    noteExpand.setAttribute("onclick",`shrinkNote(${index})`)
+}
+
+function shrinkNote(index) {
+    var note = document.getElementById(`note${index}`);
+    var noteText = note.getElementsByClassName("note-text")[0];
+    var noteExpand = note.getElementsByClassName("note-expand")[0];
+    noteText.style.maxHeight = "10vh";
+    noteExpand.innerHTML="Expand";
+    noteExpand.setAttribute("onclick",`expandNote(${index})`)
 }

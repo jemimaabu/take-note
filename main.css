@@ -94,6 +94,11 @@ div#notes-wrapper:empty {
     padding: 1em;
 }
 
+#notes-wrapper .note > *[contenteditable="true"] {
+    background-color: white;
+    color: black;
+}
+
 .note-title {
     font-size: 1.5em;
     font-weight: 700;
@@ -106,11 +111,15 @@ div#notes-wrapper:empty {
     padding-bottom: 0;
 }
 
-.note-text {   
+.note-text {      
+    text-overflow: ellipsis;
     color: #5a5a5a;
-    padding-bottom: 1em;
+    margin-bottom: 1em;
     overflow-wrap: break-word;
+    max-height: 10vh;
     white-space: pre-wrap;
+    background-color: white;
+    overflow: hidden;
 }
 
 .note-date {
@@ -127,9 +136,39 @@ div#notes-wrapper:empty {
 .note-controls {
     float: right;
     font-size: .8em;
-    color: #e60000;
     cursor: pointer;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-delete{
+    color: #bb0000;
+}
+
+.note-edit {
+    color: #00bb00
+}
+
+.note-save {
+    color: #0000bb
+}
+
+.note-save[disabled="true"] {
+    color: grey;
+    pointer-events: none;
+    user-select: none;
+    cursor: not-allowed;
 }
 
 @media (max-width: 750px) {
+    .note-text {      
+        float: left;
+        margin: 1em 0;
+    }
+
+    .note-controls {
+        float: left;
+        width: 100%;
+    }
 }
