@@ -120,6 +120,8 @@ div#notes-wrapper:empty {
     white-space: pre-wrap;
     background-color: white;
     overflow: hidden;
+    width: 100%;
+    float: left;
 }
 
 .note-date {
@@ -135,6 +137,7 @@ div#notes-wrapper:empty {
 
 .note-controls {
     float: right;
+    margin-bottom: 1em;
     font-size: .8em;
     cursor: pointer;
     width: 25%;
@@ -162,10 +165,6 @@ div#notes-wrapper:empty {
 }
 
 @media (max-width: 750px) {
-    .note-text {      
-        float: left;
-        margin: 1em 0;
-    }
 
     .note-controls {
         float: left;
