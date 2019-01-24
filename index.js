@@ -46,7 +46,6 @@ function createNote(title, text, date) {
     noteText.className = "note-text";
     noteText.innerHTML = text;
     noteText.setAttribute("onblur", `saveNote(${document.getElementsByClassName("note").length}), shrinkNote(${document.getElementsByClassName("note").length})`);
-    noteText.setAttribute("onfocus", `${this}.value = ${this}.value}`)
 
     var noteDate = document.createElement("div");
     noteDate.className="note-date";
