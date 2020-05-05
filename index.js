@@ -14,29 +14,29 @@ data.forEach(note => {
 
 function createNote(title, text, date) {
     var noteTitle = document.createElement("div");
-    noteTitle.className="note-title";
+    noteTitle.className = "note-title";
     noteTitle.innerHTML = title;
 
     var noteEdit = document.createElement("span");
-    noteEdit.className="note-edit";
+    noteEdit.className = "note-edit";
     noteEdit.innerHTML = "Edit";
-    noteEdit.setAttribute("onclick",`editNote(${document.getElementsByClassName("note").length})`);
+    noteEdit.setAttribute("onclick", `editNote(${document.getElementsByClassName("note").length})`);
 
     var noteSave = document.createElement("span");
-    noteSave.className="note-save";
+    noteSave.className = "note-save";
     noteSave.innerHTML = "Save";
     noteSave.setAttribute("disabled", "true");
-    noteSave.setAttribute("onclick",`saveNote(${document.getElementsByClassName("note").length})`);
+    noteSave.setAttribute("onclick", `saveNote(${document.getElementsByClassName("note").length})`);
 
     var noteExpand = document.createElement("span");
     noteExpand.className = "note-expand";
     noteExpand.innerHTML = "Expand";
-    noteExpand.setAttribute("onclick",`expandNote(${document.getElementsByClassName("note").length})`);
+    noteExpand.setAttribute("onclick", `expandNote(${document.getElementsByClassName("note").length})`);
 
     var noteDelete = document.createElement("span");
-    noteDelete.className="note-delete";
+    noteDelete.className = "note-delete";
     noteDelete.innerHTML = "Delete";
-    noteDelete.setAttribute("onclick",`deleteNote(${document.getElementsByClassName("note").length})`);
+    noteDelete.setAttribute("onclick", `deleteNote(${document.getElementsByClassName("note").length})`);
 
     var noteControls = document.createElement("div");
     noteControls.className = "note-controls";
@@ -45,16 +45,15 @@ function createNote(title, text, date) {
     var noteText = document.createElement("div");
     noteText.className = "note-text";
     noteText.innerHTML = text;
-    noteText.setAttribute("onblur", `saveNote(${document.getElementsByClassName("note").length}), shrinkNote(${document.getElementsByClassName("note").length})`);
 
     var noteDate = document.createElement("div");
-    noteDate.className="note-date";
+    noteDate.className = "note-date";
     noteDate.innerHTML = date;
 
     var note = document.createElement("div");
     note.className = "note";
     note.append(noteTitle, noteControls, noteText, noteDate)
-    note.id = "note"+document.getElementsByClassName("note").length;
+    note.id = "note" + document.getElementsByClassName("note").length;
 
     notesWrapper.insertBefore(note, notesWrapper.firstChild)
 }
@@ -81,33 +80,39 @@ function addNote() {
 function deleteNote(index) {
     var note = document.getElementById(`note${index}`);
     note.parentNode.removeChild(note);
-    notesArray.splice(index,1);
+    notesArray.splice(index, 1);
     localStorage.setItem("notes", JSON.stringify(notesArray));
     location.reload();
 }
 
 function editNote(index) {
     var note = document.getElementById(`note${index}`);
+    var noteTitle = note.getElementsByClassName("note-title")[0];
     var noteText = note.getElementsByClassName("note-text")[0];
     var noteSave = note.getElementsByClassName("note-save")[0];
+    noteTitle.contentEditable = "true";
     noteText.contentEditable = "true";
-    noteText.focus();
     noteSave.setAttribute("disabled", "false");
+    noteTitle.focus();
     expandNote(index)
 }
 
 function saveNote(index) {
     var note = document.getElementById(`note${index}`);
+    var noteTitle = note.getElementsByClassName("note-title")[0];
     var noteText = note.getElementsByClassName("note-text")[0];
     var noteSave = note.getElementsByClassName("note-save")[0];
     if (noteText.innerHTML.trim() === "") {
         error.innerHTML = "Cannot save empty note"
     } else {
+        notesArray[index].title = noteTitle.innerHTML;
         notesArray[index].text = noteText.innerHTML;
+        noteTitle.contentEditable = "false";
         noteText.contentEditable = "false";
         localStorage.setItem("notes", JSON.stringify(notesArray));
         error.innerHTML = "";
         noteSave.setAttribute("disabled", "true");
+        shrinkNote(index)
     }
 }
 
@@ -116,8 +121,8 @@ function expandNote(index) {
     var noteText = note.getElementsByClassName("note-text")[0];
     var noteExpand = note.getElementsByClassName("note-expand")[0];
     noteText.style.maxHeight = "fit-content";
-    noteExpand.innerHTML="Minimize";
-    noteExpand.setAttribute("onclick",`shrinkNote(${index})`)
+    noteExpand.innerHTML = "Minimize";
+    noteExpand.setAttribute("onclick", `shrinkNote(${index})`)
 }
 
 function shrinkNote(index) {
@@ -125,6 +130,6 @@ function shrinkNote(index) {
     var noteText = note.getElementsByClassName("note-text")[0];
     var noteExpand = note.getElementsByClassName("note-expand")[0];
     noteText.style.maxHeight = "10vh";
-    noteExpand.innerHTML="Expand";
-    noteExpand.setAttribute("onclick",`expandNote(${index})`)
+    noteExpand.innerHTML = "Expand";
+    noteExpand.setAttribute("onclick", `expandNote(${index})`)
 }
