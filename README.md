@@ -11,7 +11,7 @@ Because the notes are stored in your browser, you're the only one that has acces
 
 Anytime you visit [Take Note](https://jemimaabu.github.io/take-note), your notes will be displayed to you.
 
-### Offline Version
+## Offline Version
 - Clone this git repo to a folder on your laptop.
 - Open up the index.html file in any browser and bookmark the page.
 - You now have a locally stored note app on your browser.
