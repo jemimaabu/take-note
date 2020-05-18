@@ -158,7 +158,7 @@ div#notes-wrapper:empty {
 }
 
 .note-save[disabled="true"] {
-  color: #eee;
+  color: #ddd;
   pointer-events: none;
   user-select: none;
   cursor: not-allowed;
